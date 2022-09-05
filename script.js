@@ -11,8 +11,10 @@ function populateGrid(boxcount) {
         box.style.width = `${boxsize}px`;
         box.style.height= `${boxsize}px`;
         grid.appendChild(box);
-    }//populates grid with indexed boxes.
 
+        
+    }//populates grid with indexed boxes.
+    listen()
 }
 
 function draw(targetid) {
@@ -31,6 +33,32 @@ function listen() {
     })
 }
 
+function clear() {
+    let boxes = document.querySelectorAll(".box");
+    boxes.forEach(box => {
+    box.remove();
+})
+populateGrid(boxcount);
+}
+
+function resize() {
+    size = prompt('What size grid u want?')
+    if (size <= 100) {
+        gridsize = size;
+        boxcount = gridsize ** 2;
+        boxsize = 512 / gridsize;
+        clear()
+    }
+
+}
 
 populateGrid(boxcount);
-listen();
+
+//clear button
+let clearButton = document.querySelector(".clear");
+clearButton.addEventListener('click', clear)
+
+
+//resize button
+let resizeButton = document.querySelector(".size")
+resizeButton.addEventListener('click', resize)
